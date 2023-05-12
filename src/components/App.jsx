@@ -1,16 +1,81 @@
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
-  );
+import React, { Component } from "react";
+import { ContactForm } from "./ContactForm/ContactForm";
+import { ContactList } from "./ContactList/ContactList";
+import Filter from "./Filter/Filter";
+import contactsBook from './contacts.json';
+import { nanoid } from "nanoid";
+
+
+export default class App extends Component {
+
+  state = {
+    contacts: contactsBook,
+    filter: '',
+  };
+
+  addContact = (name, number)=> {
+   const formattedNumber = this.formattedNumber(number);
+   const repeatName = this.state.contacts.some(
+     el => el.name.toLowerCase === name.toLowerCase()
+   );
+   if(repeatName) {
+    return alert (`{name} is already a contact`);
+   }
+   const contact = {
+    id: nanoid(),
+    name,
+    number: formattedNumber,
+   };
+   this.setState(({contacts}) => ({ contacts: [contact, ...contacts]}));
+}
+deleteContact = contactId => {
+  this.setState(prevState => {
+    return {
+      contacts: prevState.contacts.filter(
+        contact => contact.id !== contactId
+      ),
+    };
+  });
 };
+
+changeFilter = e => {
+  this.setState({ filter: e.currentTarget.value.toLowerCase()});
+};
+
+getVisibleContacts = () => {
+  const { filter, contacts } = this.state;
+  const normalizedFilter = filter.toLowerCase();
+  return contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
+};
+
+render(){
+  const { filter } = this.state;
+  const visibleContacts = this.getVisibleContacts();
+
+  return(
+    <> 
+    <>
+    <ContactForm onAddContact={this.addContact}/>
+   <Filter value={filter} onChange={this.changeFilter}/>
+   <ContactList contacts={visibleContacts} onDelete={this.deleteContact}/>
+    </>
+    </>
+  )
+}
+}
+// export const App = () => {
+//   return (
+//     <div
+//       style={{
+//         height: '100vh',
+//         display: 'flex',
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//         fontSize: 40,
+//         color: '#010101'
+//       }}
+//     >
+//       React homework template
+//     </div>
+//   );
+// };
