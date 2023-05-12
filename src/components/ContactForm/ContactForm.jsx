@@ -7,35 +7,37 @@ import { Form, FormField, Label, FieldFormik, ErrorMessage, SubmitButton } from 
 
 
 const schema = yup.object().shape({
-    name: yup.string().trim().matches(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,'Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d`Artagnan' ).required(),
-    number: yup.string().trim().matches(/\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/, 'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +' ).required(),
+    name: yup.string().trim().matches( /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/ ,'Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d`Artagnan' ).required(),
+    number: yup.string().trim().matches( /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/ , 'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +' ).required(),
 });
 
+
+const nameId = nanoid();
+const numberId = nanoid();
 const initialValues = {
     name: '',
     number:'',
 }
-const nameId = nanoid();
-const numberId = nanoid();
 
+export const ContactForm = ({ onSubmit }) => {
+    const handleSubmit = (values, { resetForm }) => {
+        onSubmit(values.name, values.number);
+        resetForm();
+    }
 
-export const ContactForm = ({ onAddContact }) => {
     return (
-        <Formik
-            initialValue={initialValues}
-            onSubmit={(values, { resetForm }) => {
-                onAddContact({ id: nanoid(), ...values });
-                resetForm();
-            }}
-            validationSchema={schema}
+        <Formik 
+            initialValue = {initialValues}
+            onSubmit = {handleSubmit}
+            validationSchema = {schema} 
             >
                 <Form autoComplete = "off">
-                    <FormField  >
-                        <Label  htmlFor={nameId}>
+                    <FormField    >
+                        <Label htmlFor={nameId}>
                         Name
                         </Label>
                         <FieldFormik 
-                        id ={nameId}
+                        id = {nameId}
                          type="text"
                          name="name"
                          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"

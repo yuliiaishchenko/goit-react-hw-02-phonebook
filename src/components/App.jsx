@@ -1,17 +1,33 @@
 import React, { Component } from "react";
 import { ContactForm } from "./ContactForm/ContactForm";
 import { ContactList } from "./ContactList/ContactList";
-import Filter from "./Filter/Filter";
+import Filter  from "./Filter/Filter";
 import contactsBook from './contacts.json';
 import { nanoid } from "nanoid";
 
 
-export default class App extends Component {
+export class App extends Component {
 
   state = {
     contacts: contactsBook,
     filter: '',
   };
+
+  // addContact = newContact => {
+  //   this.state.contacts.filter(
+  //     contact =>
+  //       contact.name.toLowerCase().trim() ===
+  //         newContact.name.toLowerCase().trim() ||
+  //       contact.number.trim() === newContact.number.trim()
+  //   ).length
+  //     ? alert(`${newContact.name}: is already in contacts`)
+  //     : this.setState(prevState => {
+  //         return {
+  //           contacts: [newContact, ...prevState.contacts],
+  //         };
+  //       });
+  // };
+
 
   addContact = (name, number)=> {
    const formattedNumber = this.formattedNumber(number);
