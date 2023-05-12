@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Form as FormikForm, Field, ErrorMessage as FormikError } from 'formik';
+import { Form as FormikForm,  Field, ErrorMessage as FormikError } from 'formik';
 
 export const Form = styled(FormikForm)`
     max-width: 400px;
@@ -16,7 +16,7 @@ font-family: "Libre Baskerville", serif;
     font-weight: normal;`;
 
 
-export const Label = styled.div`
+export const LabelWrapper = styled.div`
 padding: 10px;`;
 
 
