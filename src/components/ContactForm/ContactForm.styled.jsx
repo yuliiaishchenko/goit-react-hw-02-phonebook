@@ -5,5 +5,5 @@ export const Form = styled(FormikForm)``;
 export const FormField = styled.label``;
 export const Label = styled.div``;
 export const FieldFormik = styled(Field)``;
-export const ErrorSpan = styled(FormikError)``;
+export const ErrorMessage = styled(FormikError)``;
 export const SubmitButton = styled.button``;
