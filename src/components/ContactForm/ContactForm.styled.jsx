@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Form as FormikForm, Field, ErrorSpan as FormikError } from 'formik';
+import { Form as FormikForm, Field, ErrorMessage as FormikError } from 'formik';
 
 export const Form = styled(FormikForm)``;
 export const FormField = styled.label``;
