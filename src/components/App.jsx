@@ -69,13 +69,13 @@ render(){
   const visibleContacts = this.getVisibleContacts();
 
   return(
-    <> 
-    <>
+    <section> 
+    <h1>Phonebook</h1>
     <ContactForm onAddContact={this.addContact}/>
    <Filter value={filter} onChange={this.changeFilter}/>
    <ContactList contacts={visibleContacts} onDelete={this.deleteContact}/>
-    </>
-    </>
+  
+    </section>
   )
 }
 }
