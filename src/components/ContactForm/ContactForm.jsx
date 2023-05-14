@@ -12,16 +12,16 @@ const schema = yup.object().shape({
 });
 
 
-const nameId = nanoid();
-const numberId = nanoid();
+// const nameId = nanoid();
+// const numberId = nanoid();
 const initialValues = {
     name: '',
     number:'',
 }
 
-export const ContactForm = ({ onSubmit }) => {
+export const ContactForm = ({ onAddContact }) => {
     const handleSubmit = (values, { resetForm }) => {
-        onSubmit(values.name, values.number);
+        onAddContact({id: nanoid(), ...values});
         resetForm();
     }
 
@@ -37,7 +37,7 @@ export const ContactForm = ({ onSubmit }) => {
                         Name
                         </LabelWrapper>
                         <FieldFormik 
-                        id = {nameId}
+                      
                          type="text"
                          name="name"
                          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -51,7 +51,7 @@ export const ContactForm = ({ onSubmit }) => {
                            Number
                            </LabelWrapper>
                         <FieldFormik 
-                        id = {numberId}
+                    
                          type="tel"
                          name="number"
                          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -66,6 +66,6 @@ export const ContactForm = ({ onSubmit }) => {
     );
 };
 
-ContactForm.propTypes = {
+ContactForm.propType = {
     onSubmit: PropTypes.func.isRequired,
 }
