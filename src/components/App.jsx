@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { ContactForm } from "./ContactForm/ContactForm";
 import { ContactList } from "./ContactList/ContactList";
 import Filter  from "./Filter/Filter";
-import contactsBook from './contacts.json';
+import initialContacts from './contacts.json';
 import { nanoid } from "nanoid";
 
 
 export class App extends Component {
 
   state = {
-    contacts: contactsBook,
+    contacts: initialContacts,
     filter: '',
   };
 

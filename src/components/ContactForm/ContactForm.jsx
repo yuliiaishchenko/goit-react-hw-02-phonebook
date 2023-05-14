@@ -27,7 +27,7 @@ export const ContactForm = ({ onSubmit }) => {
 
     return (
         <Formik 
-            initialValue = {initialValues}
+            initialValues = {initialValues}
             onSubmit = {handleSubmit}
             validationSchema = {schema} 
             >
@@ -66,6 +66,6 @@ export const ContactForm = ({ onSubmit }) => {
     );
 };
 
-ContactForm.propType = {
+ContactForm.propTypes = {
     onSubmit: PropTypes.func.isRequired,
 }
